@@ -18,4 +18,11 @@ Access the manager portal by typing `node bamazonManager.js` in the command line
 
 ![Image of Bamazon Manager Portal](./bamazonManager.png)
 
+**Supervisor Portal**
+Access the supervisor portal by typing `node bamazonSupervisor.js` in the command line.  You will be prompted to select one of two actions:
+* View Product Sales by department
+* Create New department
+
+![Image of Bamazon Supvervisor Portal](./bamazonSupervisor.png)
+
 Please contact reid.henderson@gmail.com with any questions or comments.
