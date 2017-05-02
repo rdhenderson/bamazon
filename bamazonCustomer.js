@@ -43,18 +43,23 @@ Bamazon.prototype.quit = function() {
   process.exit();
 }
 
-Bamazon.prototype.sellProduct = function(table, id, updatedQuantity) {
+Bamazon.prototype.sellProduct = function(table, id, updatedQuantity, price, department_name) {
 	var queryString = 'UPDATE products SET stock_quantity = ? WHERE item_id = ?';
 	var that = this;
 	this.connection.query(queryString, [updatedQuantity, id], function(err, rows, fields) {
 	    if (err) return console.log(err);
-      return that.listen();
+      return that.logSales(price, department_name);
 	});
 };
 
-var storeFront = new Bamazon();
-storeFront.getProducts();
-
+Bamazon.prototype.logSales = function(price, department_name){
+	var queryString = 'UPDATE departments SET total_sales = total_sales + ? WHERE department_name = ?';
+	var that = this;
+	this.connection.query(queryString, [price, department_name], function(err, rows, fields) {
+	    if (err) return console.log(err);
+      return that.listen();
+	});
+}
 Bamazon.prototype.listen = function(){
 	//Choose question set based on command line interface flag
   this.showProducts();
@@ -84,11 +89,17 @@ Bamazon.prototype.listen = function(){
           return that.listen();
         } else {
           that.products[i].stock_quantity -= answers.quantity;
-          console.log('Total cost: $', parseFloat(answers.quantity * that.products[i].price).toFixed(2));
-          return that.sellProduct('products', answers.item, that.products[i].stock_quantity);
+					var totalCost = parseFloat(answers.quantity * that.products[i].price).toFixed(2);
+          console.log('Total cost: $', totalCost);
+          return that.sellProduct('products', answers.item, that.products[i].stock_quantity, totalCost, that.products[i].department_name);
         }
       }
     }
     console.log('Please select a valid product.');
 	});
 };
+
+
+
+var storeFront = new Bamazon();
+storeFront.getProducts();
