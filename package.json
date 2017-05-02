@@ -1,0 +1,23 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "Mock online storefront with mySQL backend",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rdhenderson/bamazon.git"
+  },
+  "keywords": [
+    "mysql",
+    "storefront"
+  ],
+  "author": "reid.henderson@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rdhenderson/bamazon/issues"
+  },
+  "homepage": "https://github.com/rdhenderson/bamazon#readme"
+}
